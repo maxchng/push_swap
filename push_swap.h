@@ -6,7 +6,7 @@
 /*   By: ychng <ychng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 14:48:15 by ychng             #+#    #+#             */
-/*   Updated: 2023/09/11 17:12:23 by ychng            ###   ########.fr       */
+/*   Updated: 2023/09/11 18:25:12 by ychng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,21 @@ typedef struct s_linked_list
 	t_node	*tail;	
 }	t_linked_list;
 
+typedef struct s_steps
+{
+	unsigned int	sa;
+	unsigned int	sb;
+	unsigned int	ss;
+	unsigned int	pa;
+	unsigned int	pb;
+	unsigned int	ra;
+	unsigned int	rb;
+	unsigned int	rr;
+	unsigned int	rra;
+	unsigned int	rrb;
+	unsigned int	rrr;
+}	t_steps;
+
 // operations_utils.c
 t_node	*create_node(int num);
 t_node	*pop(t_linked_list *stack);
@@ -43,20 +58,20 @@ void	shift(t_linked_list *stack, int up);
 void	show_list(t_linked_list *stack);
 
 // instructions_1.c
-void	sa(t_linked_list *stack_a);
-void	sb(t_linked_list *stack_b);
-void	ss(t_linked_list *stack_a, t_linked_list *stack_b);
-void	pa(t_linked_list *stack_a, t_linked_list *stack_b);
-void	pb(t_linked_list *stack_a, t_linked_list *stack_b);
+void	sa(t_linked_list *stack_a, t_steps *steps);
+void	sb(t_linked_list *stack_b, t_steps *steps);
+void	ss(t_linked_list *stack_a, t_linked_list *stack_b, t_steps *steps);
+void	pa(t_linked_list *stack_a, t_linked_list *stack_b, t_steps *steps);
+void	pb(t_linked_list *stack_a, t_linked_list *stack_b, t_steps *steps);
 
 // instructions_2.c
-void	ra(t_linked_list *stack_a);
-void	rb(t_linked_list *stack_b);
-void	rr(t_linked_list *stack_a, t_linked_list *stack_b);
+void	ra(t_linked_list *stack_a, t_steps *steps);
+void	rb(t_linked_list *stack_b, t_steps *steps);
+void	rr(t_linked_list *stack_a, t_linked_list *stack_b, t_steps *steps);
 
 // instructions_3.c
-void	rra(t_linked_list *stack_a);
-void	rrb(t_linked_list *stack_b);
-void	rrr(t_linked_list *stack_a, t_linked_list *stack_b);
+void	rra(t_linked_list *stack_a, t_steps *steps);
+void	rrb(t_linked_list *stack_b, t_steps *steps);
+void	rrr(t_linked_list *stack_a, t_linked_list *stack_b, t_steps *steps);
 
 #endif
