@@ -4,7 +4,12 @@
 NAME = push_swap
 
 # Source files
-SRCS = push_swap.c
+SRCS =	push_swap.c \
+		operations.c \
+		operations_utils.c \
+		instructions_1.c \
+		instructions_2.c \
+		instructions_3.c
 
 # Object files
 OBJS = $(SRCS:.c=.o)
