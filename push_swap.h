@@ -6,7 +6,7 @@
 /*   By: ychng <ychng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 14:48:15 by ychng             #+#    #+#             */
-/*   Updated: 2023/09/11 18:25:12 by ychng            ###   ########.fr       */
+/*   Updated: 2023/09/11 21:45:49 by ychng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <limits.h>
 # include "libft.h"
 
 typedef struct s_node
@@ -73,5 +74,18 @@ void	rr(t_linked_list *stack_a, t_linked_list *stack_b, t_steps *steps);
 void	rra(t_linked_list *stack_a, t_steps *steps);
 void	rrb(t_linked_list *stack_b, t_steps *steps);
 void	rrr(t_linked_list *stack_a, t_linked_list *stack_b, t_steps *steps);
+
+// ft_strtok.c
+char	*ft_strtok(char *str, const char *delim);
+
+// ps_atoi.c
+long	ps_atoi(const char *str);
+
+// parse_argv.c
+void	parse_argv(t_linked_list *stack_a, int argc, char **argv);
+
+// err_handling.c
+void	free_stack(t_linked_list *stack);
+void	exit_error(t_linked_list *stack, char *msg);
 
 #endif

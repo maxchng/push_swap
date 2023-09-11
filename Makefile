@@ -9,7 +9,11 @@ SRCS =	push_swap.c \
 		operations_utils.c \
 		instructions_1.c \
 		instructions_2.c \
-		instructions_3.c
+		instructions_3.c \
+		ft_strtok.c \
+		ps_atoi.c \
+		parse_argv.c \
+		err_handling.c
 
 # Object files
 OBJS = $(SRCS:.c=.o)

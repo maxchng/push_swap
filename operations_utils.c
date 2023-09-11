@@ -6,7 +6,7 @@
 /*   By: ychng <ychng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 21:40:13 by ychng             #+#    #+#             */
-/*   Updated: 2023/09/11 16:52:57 by ychng            ###   ########.fr       */
+/*   Updated: 2023/09/11 21:32:24 by ychng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,7 @@ t_node	*create_node(int num)
 
 	newnode = ft_calloc(1, sizeof(t_node));
 	if (!newnode)
-	{
-		write(2, "ft_calloc() failed in create_node().\n", 37);
 		return (NULL);
-	}
 	newnode->data = num;
 	return (newnode);
 }

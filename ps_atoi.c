@@ -1,29 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   ps_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ychng <ychng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/10 14:48:10 by ychng             #+#    #+#             */
-/*   Updated: 2023/09/11 21:38:50 by ychng            ###   ########.fr       */
+/*   Created: 2023/04/30 18:20:59 by ychng             #+#    #+#             */
+/*   Updated: 2023/09/11 19:18:53 by ychng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	main(int argc, char **argv)
+long	ps_atoi(const char *str)
 {
-	t_linked_list	stack_a;
-	t_linked_list	stack_b;
-	t_steps			steps;
+	int		i;
+	int		sign;
+	long	result;
 
-	stack_a = (t_linked_list){0};
-	stack_b = (t_linked_list){0};
-	steps = (t_steps){0};
-	if (argc >= 2)
+	i = 0;
+	result = 0;
+	sign = 1;
+	while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
+		i++;
+	if (str[i] == '-')
+		sign = -1;
+	if (str[i] == '-' || str[i] == '+')
+		i++;
+	while (str[i] >= '0' && str[i] <= '9')
 	{
-		parse_argv(&stack_a, argc, argv);
-		show_list(&stack_a);
+		result = result * 10 + str[i] - '0';
+		i++;
 	}
+	return (result * sign);
 }
