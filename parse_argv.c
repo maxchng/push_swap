@@ -6,7 +6,7 @@
 /*   By: ychng <ychng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 21:37:52 by ychng             #+#    #+#             */
-/*   Updated: 2023/09/12 18:20:53 by ychng            ###   ########.fr       */
+/*   Updated: 2023/09/12 18:40:59 by ychng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ static void	validate_and_insert(t_linked_list *stack_a, char *token)
 void	parse_argv(t_linked_list *stack_a, int argc, char **argv)
 {
 	int		i;
-	long	num;
 	char	*token;
 	t_node	*newnode;
 
