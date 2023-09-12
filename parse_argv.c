@@ -6,13 +6,36 @@
 /*   By: ychng <ychng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 21:37:52 by ychng             #+#    #+#             */
-/*   Updated: 2023/09/11 22:12:40 by ychng            ###   ########.fr       */
+/*   Updated: 2023/09/12 18:20:53 by ychng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int	not_valid_num(char *token)
+static int	is_not_empty(t_linked_list *stack_a, char *str)
+{
+	int	i;
+	int	is_empty;
+
+	i = 0;
+	is_empty = 1;
+	if (str[i] == '\0')
+		exit_error(stack_a, "Error\n");
+	while (str[i])
+	{
+		if (str[i] != ' ')
+		{
+			is_empty = 0;
+			break ;
+		}
+		i++;
+	}
+	if (is_empty == 1)
+		exit_error(stack_a, "Error\n");
+	return (1);
+}
+
+static int	is_not_numeric(char *token)
 {
 	int	i;
 
@@ -30,11 +53,6 @@ static int	not_valid_num(char *token)
 	return (0);
 }
 
-static int	not_valid_int(long num)
-{
-	return (num < INT_MIN || num > INT_MAX);
-}
-
 static int	is_duplicate(t_linked_list *stack_a, int num)
 {
 	t_node	*current;
@@ -49,6 +67,24 @@ static int	is_duplicate(t_linked_list *stack_a, int num)
 	return (0);
 }
 
+static void	validate_and_insert(t_linked_list *stack_a, char *token)
+{
+	long	num;
+	t_node	*newnode;
+
+	if (is_not_numeric(token))
+		exit_error(stack_a, "Error\n");
+	num = ps_atoi(token);
+	if (num < INT_MIN || num > INT_MAX)
+		exit_error(stack_a, "Error\n");
+	if (is_duplicate(stack_a, num))
+		exit_error(stack_a, "Error\n");
+	newnode = create_node(num);
+	if (!newnode)
+		exit_error(stack_a, "Error\n");
+	link_list(stack_a, newnode, 0);
+}
+
 void	parse_argv(t_linked_list *stack_a, int argc, char **argv)
 {
 	int		i;
@@ -59,21 +95,13 @@ void	parse_argv(t_linked_list *stack_a, int argc, char **argv)
 	i = 1;
 	while (i < argc)
 	{
-		token = ft_strtok(argv[i++], " ");
+		is_not_empty(stack_a, argv[i]);
+		token = ft_strtok(argv[i], " ");
 		while (token)
 		{
-			if (not_valid_num(token))
-				exit_error(stack_a, "Error\n");
-			num = ps_atoi(token);
-			if (not_valid_int(num))
-				exit_error(stack_a, "Error\n");
-			if (is_duplicate(stack_a, num))
-				exit_error(stack_a, "Error\n");
-			newnode = create_node(num);
-			if (!newnode)
-				exit_error(stack_a, "Error\n");
-			link_list(stack_a, newnode, 0);
+			validate_and_insert(stack_a, token);
 			token = ft_strtok(NULL, " ");
 		}
+		i++;
 	}
 }
