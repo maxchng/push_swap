@@ -6,7 +6,7 @@
 /*   By: ychng <ychng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 14:48:15 by ychng             #+#    #+#             */
-/*   Updated: 2023/09/11 21:45:49 by ychng            ###   ########.fr       */
+/*   Updated: 2023/09/14 14:17:49 by ychng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,6 @@
 # include <unistd.h>
 # include <limits.h>
 # include "libft.h"
-
-typedef struct s_node
-{
-	int				data;
-	struct s_node	*next;
-	struct s_node	*prev;
-}	t_node;
-
-typedef struct s_linked_list
-{
-	t_node	*head;
-	t_node	*tail;	
-}	t_linked_list;
 
 typedef struct s_steps
 {
@@ -46,6 +33,21 @@ typedef struct s_steps
 	unsigned int	rrb;
 	unsigned int	rrr;
 }	t_steps;
+
+typedef struct s_node
+{
+	int				data;
+	int				index;
+	struct s_node	*next;
+	struct s_node	*prev;
+	t_steps			steps;
+}	t_node;
+
+typedef struct s_linked_list
+{
+	t_node	*head;
+	t_node	*tail;	
+}	t_linked_list;
 
 // operations_utils.c
 t_node	*create_node(int num);
