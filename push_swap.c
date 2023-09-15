@@ -6,7 +6,7 @@
 /*   By: ychng <ychng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 14:48:10 by ychng             #+#    #+#             */
-/*   Updated: 2023/09/15 15:46:42 by ychng            ###   ########.fr       */
+/*   Updated: 2023/09/15 16:12:14 by ychng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -298,6 +298,44 @@ void	run_steps(t_node *current, t_linked_list *stack_a,
 		rrr(stack_a, stack_b);
 }
 
+int	find_max_index(t_linked_list *stack_b)
+{
+	int		max;
+	t_node	*current;
+
+	add_index(stack_b);
+	max = find_max(stack_b);
+	current = stack_b->head;
+	while (current)
+	{
+		if (current->data == max)
+			break ;
+		current = current->next;
+	}
+	return (current->index);
+}
+
+void	sort_descending(t_linked_list *stack_b)
+{
+	int		size;
+	int		max_b;
+	int		max_index;
+	t_node	*current;
+
+	size = count_size(stack_b);
+	max_b = find_max(stack_b);
+	max_index = find_max_index(stack_b);
+	current = stack_b->head;
+	while (current->data != max_b)
+	{
+		if (max_index > (size / 2))
+			rrb(stack_b);
+		else
+			rb(stack_b);
+		current = stack_b->head;
+	}
+}
+
 void	sort_big(t_linked_list *stack_a, t_linked_list *stack_b)
 {
 	int		size;
@@ -321,6 +359,7 @@ void	sort_big(t_linked_list *stack_a, t_linked_list *stack_b)
 			current = current->next;
 		}
 	}
+	sort_descending(stack_b);
 }
 
 int	main(int argc, char **argv)
@@ -334,9 +373,7 @@ int	main(int argc, char **argv)
 	{
 		parse_argv(&stack_a, argc, argv);
 		sort_big(&stack_a, &stack_b);
-		show_steps(&stack_a);
-		show_list(&stack_a);
-		printf("\nThis is b\n");
-		show_list(&stack_a);
+		printf("\nThis is b:\n");
+		show_list(&stack_b);
 	}
 }
