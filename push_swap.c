@@ -6,7 +6,7 @@
 /*   By: ychng <ychng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 14:48:10 by ychng             #+#    #+#             */
-/*   Updated: 2023/09/15 16:12:14 by ychng            ###   ########.fr       */
+/*   Updated: 2023/09/15 16:19:06 by ychng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -336,6 +336,15 @@ void	sort_descending(t_linked_list *stack_b)
 	}
 }
 
+void	empty_stack_b(t_linked_list *stack_a, t_linked_list *stack_b)
+{
+	int	size_b;
+
+	size_b = count_size(stack_b);
+	while (size_b--)
+		pa(stack_a, stack_b);
+}
+
 void	sort_big(t_linked_list *stack_a, t_linked_list *stack_b)
 {
 	int		size;
@@ -360,6 +369,7 @@ void	sort_big(t_linked_list *stack_a, t_linked_list *stack_b)
 		}
 	}
 	sort_descending(stack_b);
+	empty_stack_b(stack_a, stack_b);
 }
 
 int	main(int argc, char **argv)
@@ -373,7 +383,5 @@ int	main(int argc, char **argv)
 	{
 		parse_argv(&stack_a, argc, argv);
 		sort_big(&stack_a, &stack_b);
-		printf("\nThis is b:\n");
-		show_list(&stack_b);
 	}
 }
