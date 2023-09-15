@@ -6,7 +6,7 @@
 /*   By: ychng <ychng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 14:48:10 by ychng             #+#    #+#             */
-/*   Updated: 2023/09/15 12:26:02 by ychng            ###   ########.fr       */
+/*   Updated: 2023/09/15 15:03:53 by ychng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,16 +221,16 @@ void	calc_rr_and_rrr(t_linked_list *stack_a)
 
 void	count_steps(t_linked_list *stack_a, t_linked_list *stack_b)
 {
-	pb(stack_a, stack_b, &(t_steps){0});
-	pb(stack_a, stack_b, &(t_steps){0});
+	pb(stack_a, stack_b);
+	pb(stack_a, stack_b);
 	add_index(stack_a);
 	move_to_top(stack_a);
 	move_min_or_max(stack_a, stack_b);
 	move_in_between(stack_a, stack_b);
 	calc_rr_and_rrr(stack_a);
 	show_steps(stack_a);
-	pa(stack_a, stack_b, &(t_steps){0});
-	pa(stack_a, stack_b, &(t_steps){0});
+	pa(stack_a, stack_b);
+	pa(stack_a, stack_b);
 }
 
 int	main(int argc, char **argv)
@@ -244,6 +244,5 @@ int	main(int argc, char **argv)
 	{
 		parse_argv(&stack_a, argc, argv);
 		count_steps(&stack_a, &stack_b);
-		show_list(&stack_a);
 	}
 }

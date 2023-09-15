@@ -6,7 +6,7 @@
 /*   By: ychng <ychng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 14:48:15 by ychng             #+#    #+#             */
-/*   Updated: 2023/09/14 14:17:49 by ychng            ###   ########.fr       */
+/*   Updated: 2023/09/15 15:02:45 by ychng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,21 +61,21 @@ void	shift(t_linked_list *stack, int up);
 void	show_list(t_linked_list *stack);
 
 // instructions_1.c
-void	sa(t_linked_list *stack_a, t_steps *steps);
-void	sb(t_linked_list *stack_b, t_steps *steps);
-void	ss(t_linked_list *stack_a, t_linked_list *stack_b, t_steps *steps);
-void	pa(t_linked_list *stack_a, t_linked_list *stack_b, t_steps *steps);
-void	pb(t_linked_list *stack_a, t_linked_list *stack_b, t_steps *steps);
+void	sa(t_linked_list *stack_a);
+void	sb(t_linked_list *stack_b);
+void	ss(t_linked_list *stack_a, t_linked_list *stack_b);
+void	pa(t_linked_list *stack_a, t_linked_list *stack_b);
+void	pb(t_linked_list *stack_a, t_linked_list *stack_b);
 
 // instructions_2.c
-void	ra(t_linked_list *stack_a, t_steps *steps);
-void	rb(t_linked_list *stack_b, t_steps *steps);
-void	rr(t_linked_list *stack_a, t_linked_list *stack_b, t_steps *steps);
+void	ra(t_linked_list *stack_a);
+void	rb(t_linked_list *stack_b);
+void	rr(t_linked_list *stack_a, t_linked_list *stack_b);
 
 // instructions_3.c
-void	rra(t_linked_list *stack_a, t_steps *steps);
-void	rrb(t_linked_list *stack_b, t_steps *steps);
-void	rrr(t_linked_list *stack_a, t_linked_list *stack_b, t_steps *steps);
+void	rra(t_linked_list *stack_a);
+void	rrb(t_linked_list *stack_b);
+void	rrr(t_linked_list *stack_a, t_linked_list *stack_b);
 
 // ft_strtok.c
 char	*ft_strtok(char *str, const char *delim);
