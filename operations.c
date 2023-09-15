@@ -6,7 +6,7 @@
 /*   By: ychng <ychng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 22:03:31 by ychng             #+#    #+#             */
-/*   Updated: 2023/09/11 14:36:04 by ychng            ###   ########.fr       */
+/*   Updated: 2023/09/15 17:48:36 by ychng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	show_list(t_linked_list *stack)
 	current = stack->head;
 	while (current)
 	{
-		printf("%d\n", current->data);
+		printf("\n%d", current->data);
 		current = current->next;
 	}
 }

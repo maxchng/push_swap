@@ -6,7 +6,7 @@
 /*   By: ychng <ychng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 14:48:10 by ychng             #+#    #+#             */
-/*   Updated: 2023/09/15 16:19:06 by ychng            ###   ########.fr       */
+/*   Updated: 2023/09/15 18:34:54 by ychng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,14 +174,15 @@ void	move_in_between(t_linked_list *stack_a, t_linked_list *stack_b)
 	}
 }
 
-void	show_steps(t_linked_list *stack_a)
+void	show_steps(t_linked_list *stack_a, t_node *current)
 {
-	t_node	*current;
+	// t_node	*current;
 
-	current = stack_a->head;
+	// current = stack_a->head;
 	while (current)
 	{
 		printf("\n\nCurrent number: %d", current->data);
+		printf("\nIndex number: %d", current->index);
 		printf("\n-------------------\n");
 		printf("pa: %d  ", current->steps.pa);
 		printf("pb: %d  ", current->steps.pb);
@@ -274,28 +275,36 @@ int	find_min_steps_index(t_linked_list *stack_a)
 void	run_steps(t_node *current, t_linked_list *stack_a,
 					t_linked_list *stack_b)
 {
-	while (current->steps.sa--)
-		sa(stack_a);
-	while (current->steps.sb--)
-		sb(stack_b);
-	while (current->steps.ss--)
-		ss(stack_a, stack_b);
-	while (current->steps.pa--)
-		pa(stack_a, stack_b);
-	while (current->steps.pb--)
-		pb(stack_a, stack_b);
-	while (current->steps.ra--)
+	while (current->steps.ra)
+	{
 		ra(stack_a);
-	while (current->steps.rb--)
+		current->steps.ra--;
+	}
+	while (current->steps.rb)
+	{
 		rb(stack_b);
-	while (current->steps.rr--)
+		current->steps.rb--;
+	}
+	while (current->steps.rr)
+	{
 		rr(stack_a, stack_b);
-	while (current->steps.rra--)
+		current->steps.rr--;
+	}
+	while (current->steps.rra)
+	{
 		rra(stack_a);
-	while (current->steps.rrb--)
+		current->steps.rra--;
+	}
+	while (current->steps.rrb)
+	{
 		rrb(stack_b);
-	while (current->steps.rrr--)
+		current->steps.rrb--;
+	}
+	while (current->steps.rrr)
+	{
 		rrr(stack_a, stack_b);
+		current->steps.rrr--;
+	}
 }
 
 int	find_max_index(t_linked_list *stack_b)
@@ -350,26 +359,30 @@ void	sort_big(t_linked_list *stack_a, t_linked_list *stack_b)
 	int		size;
 	t_node	*current;
 
-	pb(stack_a, stack_b);
-	pb(stack_a, stack_b);
-	size = count_size(stack_a);
-	while (size--)
-	{
-		count_steps(stack_a, stack_b);
+	size = 6;
+	// while (size--)
+	// {
+	// 	count_steps(stack_a, stack_b);
 		current = stack_a->head;
-		while (current)
-		{
-			if (current->index == find_min_steps_index(stack_a))
-			{
-				run_steps(current, stack_a, stack_b);
-				pb(stack_a, stack_b);
-				break ;
-			}
-			current = current->next;
-		}
-	}
-	sort_descending(stack_b);
-	empty_stack_b(stack_a, stack_b);
+	// 	while (current)
+	// 	{
+	// 		if (current->index == find_min_steps_index(stack_a))
+	// 		{
+	// 			printf("INDEX: %d\n", current->index);
+	// 			printf("STEPS: %d\n", find_min_steps_index(stack_a));
+	// 			printf("SUM: %d\n", sum_steps(current));
+	// 			// if (count_size(stack_b) == 8)
+					show_steps(stack_a, current);
+	// 			// printf("\nindex: %d\n", find_min_steps_index(stack_a));
+	// 			run_steps(current, stack_a, stack_b);
+	// 			pb(stack_a, stack_b);
+	// 			break ;
+	// 		}
+	// 		current = current->next;
+	// 	}
+	// }
+	// sort_descending(stack_b);
+	// empty_stack_b(stack_a, stack_b);
 }
 
 int	main(int argc, char **argv)
@@ -382,6 +395,25 @@ int	main(int argc, char **argv)
 	if (argc >= 2)
 	{
 		parse_argv(&stack_a, argc, argv);
+		pb(&stack_a, &stack_b);
+		pb(&stack_a, &stack_b);
+		rb(&stack_b);
+		pb(&stack_a, &stack_b);
+		rrb(&stack_b);
+		pb(&stack_a, &stack_b);
+		rrb(&stack_b);
+		pb(&stack_a, &stack_b);
+		rrb(&stack_b);
+		rrb(&stack_b);
+		pb(&stack_a, &stack_b);
+		pb(&stack_a, &stack_b);
+		rb(&stack_b);
+		rb(&stack_b);
+		pb(&stack_a, &stack_b);
+		count_steps(&stack_a, &stack_b);
 		sort_big(&stack_a, &stack_b);
+		show_list(&stack_b);
+		// show_list(&stack_b);
+		printf("\nindex: %d\n", find_min_steps_index(&stack_a));
 	}
 }
