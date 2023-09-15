@@ -6,7 +6,7 @@
 /*   By: ychng <ychng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 14:48:15 by ychng             #+#    #+#             */
-/*   Updated: 2023/09/15 15:02:45 by ychng            ###   ########.fr       */
+/*   Updated: 2023/09/15 19:59:02 by ychng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,6 @@
 
 typedef struct s_steps
 {
-	unsigned int	sa;
-	unsigned int	sb;
-	unsigned int	ss;
-	unsigned int	pa;
-	unsigned int	pb;
 	unsigned int	ra;
 	unsigned int	rb;
 	unsigned int	rr;

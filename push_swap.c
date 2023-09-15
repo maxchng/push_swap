@@ -6,7 +6,7 @@
 /*   By: ychng <ychng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 14:48:10 by ychng             #+#    #+#             */
-/*   Updated: 2023/09/15 19:51:20 by ychng            ###   ########.fr       */
+/*   Updated: 2023/09/15 20:01:06 by ychng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,10 +183,7 @@ void	show_steps(t_linked_list *stack_a)
 	while (current)
 	{
 		printf("\n\nCurrent number: %d", current->data);
-		printf("\nIndex: %d", current->index);
 		printf("\n-------------------\n");
-		printf("pa: %d  ", current->steps.pa);
-		printf("pb: %d  ", current->steps.pb);
 		printf("ra: %d  ", current->steps.ra);
 		printf("rb: %d  ", current->steps.rb);
 		printf("rr: %d  ", current->steps.rr);
@@ -223,8 +220,14 @@ void	calc_rr_and_rrr(t_linked_list *stack_a)
 
 void	count_steps(t_linked_list *stack_a, t_linked_list *stack_b)
 {
-	stack_a->head->steps = (t_steps){0};
-	add_index(stack_a);
+	t_node	*current;
+
+	current = stack_a->head;
+	while (current)
+	{
+		current->steps = (t_steps){0};
+		current = current->next;
+	}
 	move_to_top(stack_a);
 	move_min_or_max(stack_a, stack_b);
 	move_in_between(stack_a, stack_b);
@@ -236,11 +239,6 @@ int	sum_steps(t_node *current)
 	int	total_steps;
 
 	total_steps = 0;
-	total_steps += current->steps.sa;
-	total_steps += current->steps.sb;
-	total_steps += current->steps.ss;
-	total_steps += current->steps.pa;
-	total_steps += current->steps.pb;
 	total_steps += current->steps.ra;
 	total_steps += current->steps.rb;
 	total_steps += current->steps.rr;
@@ -337,7 +335,7 @@ void	empty_stack_b(t_linked_list *stack_a, t_linked_list *stack_b)
 		pa(stack_a, stack_b);
 }
 
-void	sort_bbig(t_linked_list *stack_a, t_linked_list *stack_b)
+void	sort_big(t_linked_list *stack_a, t_linked_list *stack_b)
 {
 	int		size;
 	t_node	*current;
@@ -364,50 +362,6 @@ void	sort_bbig(t_linked_list *stack_a, t_linked_list *stack_b)
 	empty_stack_b(stack_a, stack_b);
 }
 
-void	counting(t_linked_list *stack_a, t_linked_list *stack_b)
-{
-	t_node	*current;
-
-	current = stack_a->head;
-	while (current)
-	{
-		current->steps = (t_steps){0};
-		current = current->next;
-	}
-	move_to_top(stack_a);
-	move_min_or_max(stack_a, stack_b);
-	move_in_between(stack_a, stack_b);
-	calc_rr_and_rrr(stack_a);
-}
-
-void	sort_big(t_linked_list *stack_a, t_linked_list *stack_b)
-{
-	int		size;
-	t_node	*current;
-
-	pb(stack_a, stack_b);
-	pb(stack_a, stack_b);
-	size = count_size(stack_a);
-	while (size--)
-	{
-		current = stack_a->head;
-		counting(stack_a, stack_b);
-		while (current)
-		{
-			if (current->index == find_min_steps_index(stack_a))
-			{
-				run_steps(current, stack_a, stack_b);
-				pb(stack_a, stack_b);
-				break ;
-			}
-			current = current->next;
-		}
-
-	}
-	sort_descending(stack_b);
-	empty_stack_b(stack_a, stack_b);
-}
-
 int	main(int argc, char **argv)
 {
 	t_linked_list	stack_a;
@@ -418,19 +372,6 @@ int	main(int argc, char **argv)
 	if (argc >= 2)
 	{
 		parse_argv(&stack_a, argc, argv);
-		// rb(&stack_b);
-		// pb(&stack_a, &stack_b);
-		// rrb(&stack_b);
-		// pb(&stack_a, &stack_b);
-		// rrb(&stack_b);
-		// pb(&stack_a, &stack_b);
-		// rrb(&stack_b);
-		// rrb(&stack_b);
-		// pb(&stack_a, &stack_b);
-		// pb(&stack_a, &stack_b);
-		// rb(&stack_b);
-		// rb(&stack_b);
-		// pb(&stack_a, &stack_b);
 		sort_big(&stack_a, &stack_b);
 	}
 }
