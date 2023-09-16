@@ -6,7 +6,7 @@
 /*   By: ychng <ychng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 14:48:10 by ychng             #+#    #+#             */
-/*   Updated: 2023/09/15 20:01:06 by ychng            ###   ########.fr       */
+/*   Updated: 2023/09/16 20:12:05 by ychng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	add_index(t_linked_list *stack)
 	}
 }
 
-int	count_size(t_linked_list *stack)
+int	count_stack_size(t_linked_list *stack)
 {
 	int		size;
 	t_node	*current;
@@ -41,31 +41,31 @@ int	count_size(t_linked_list *stack)
 	return (size);
 }
 
-void	move_to_top(t_linked_list *stack_a)
+void	steps_to_top_of_a(t_linked_list *stack_a)
 {
-	int		size;
-	t_node	*current;
+	int		size_a;
+	t_node	*current_a;
 
 	add_index(stack_a);
-	size = count_size(stack_a);
-	current = stack_a->head;
-	while (current)
+	size_a = count_stack_size(stack_a);
+	current_a = stack_a->head;
+	while (current_a)
 	{
-		if (current->index > (size / 2))
-			current->steps.rra += (size - current->index);
+		if (current_a->index > (size_a / 2))
+			current_a->steps.rra += (size_a - current_a->index);
 		else
-			current->steps.ra += current->index;
-		current = current->next;
+			current_a->steps.ra += current_a->index;
+		current_a = current_a->next;
 	}
 }
 
-int	find_min(t_linked_list *stack_b)
+int	find_min_num(t_linked_list *stack)
 {
 	int		min;
 	t_node	*current;
 
-	min = stack_b->head->data;
-	current = stack_b->head;
+	min = stack->head->data;
+	current = stack->head;
 	while (current)
 	{
 		if (min > current->data)
@@ -75,13 +75,13 @@ int	find_min(t_linked_list *stack_b)
 	return (min);
 }
 
-int	find_max(t_linked_list *stack_b)
+int	find_max_num(t_linked_list *stack)
 {
 	int		max;
 	t_node	*current;
 
-	max = stack_b->head->data;
-	current = stack_b->head;
+	max = stack->head->data;
+	current = stack->head;
 	while (current)
 	{
 		if (max < current->data)
@@ -91,87 +91,95 @@ int	find_max(t_linked_list *stack_b)
 	return (max);
 }
 
-static void	move_max_to_top(t_node *current_a, t_linked_list *stack_b)
+void	steps_max_to_top_of_b(t_node *current_a, t_linked_list *stack_b)
 {
-	int		size;
 	int		max_b;
+	int		size_b;
 	t_node	*current_b;
 
-	size = count_size(stack_b);
-	max_b = find_max(stack_b);
+	add_index(stack_b);
+	max_b = find_max_num(stack_b);
+	size_b = count_stack_size(stack_b);
 	current_b = stack_b->head;
 	while (current_b)
 	{
 		if (current_b->data == max_b)
 		{
-			if (current_b->index > (size / 2))
-				current_a->steps.rrb += (size - current_b->index);
+			if (current_b->index > (size_b / 2))
+				current_b->steps.rra += (size_b - current_b->index);
 			else
-				current_a->steps.rb += (current_b->index);
+				current_b->steps.ra += current_b->index;
 		}
 		current_b = current_b->next;
 	}
 }
 
-void	move_min_or_max(t_linked_list *stack_a, t_linked_list *stack_b)
+void	steps_to_handle_min_max(t_linked_list *stack_a, t_linked_list *stack_b)
 {
 	int		min_b;
 	int		max_b;
-	t_node	*current;
+	t_node	*current_a;
 
-	add_index(stack_b);
-	min_b = find_min(stack_b);
-	max_b = find_max(stack_b);
-	current = stack_a->head;
-	while (current)
+	min_b = find_min_num(stack_b);
+	max_b = find_max_num(stack_b);
+	current_a = stack_a->head;
+	while (current_a)
 	{
-		if (current->data < min_b || current->data > max_b)
-			move_max_to_top(current, stack_b);
-		current = current->next;
+		if (current_a->data < min_b || current_a->data > max_b)
+			steps_max_to_top_of_b(current_a, stack_b);
+		current_a = current_a->next;
 	}
 }
 
 void	set_steps(t_node *current_a, t_node *current_b, t_linked_list *stack_b)
 {
-	int	size;
+	int	size_b;
 
-	size = count_size(stack_b);
-	if (current_b->next->index > (size / 2))
-		current_a->steps.rrb = (size - current_b->next->index);
+	add_index(stack_b);
+	size_b = count_stack_size(stack_b);
+	if (current_b->next->index > (size_b / 2))
+		current_a->steps.rrb = (size_b - current_b->next->index);
 	else
 		current_a->steps.rb = current_b->next->index;
 }
 
-void	find_small_top_big_bottom(t_node *current_a, t_linked_list *stack_b)
+void	steps_small_top_big_bottom(t_node *current_a, t_linked_list *stack_b)
 {
-	int		size;
+	int		a_data;
+	int		b_data;
+	int		next_b_data;
 	t_node	*tail_b;
 	t_node	*current_b;
 
-	size = count_size(stack_b);
 	tail_b = stack_b->tail;
 	current_b = stack_b->head;
-	if (current_a->data > current_b->data && current_a->data < tail_b->data)
+	a_data = current_a->data;
+	if (a_data > b_data && a_data < tail_b->data)
 		return ;
-	while (current_b->index < (size - 1))
+	while (current_b->next)
 	{
-		if (current_a->data > current_b->next->data
-			&& current_a->data < current_b->data)
+		b_data = current_b->data;
+		next_b_data = current_b->next->data;
+		if (a_data > next_b_data && a_data < b_data)
 			set_steps(current_a, current_b, stack_b);
 		current_b = current_b->next;
 	}
 }
 
-void	move_in_between(t_linked_list *stack_a, t_linked_list *stack_b)
+void	steps_for_other_numbers(t_linked_list *stack_a, t_linked_list *stack_b)
 {
-	t_node	*current;
+	int		min_b;
+	int		max_b;
+	t_node	*current_a;
 
-	add_index(stack_b);
-	current = stack_a->head;
-	while (current)
+	min_b = find_min_num(stack_b);
+	max_b = find_max_num(stack_b);
+	current_a = stack_a->head;
+	while (current_a)
 	{
-		find_small_top_big_bottom(current, stack_b);
-		current = current->next;
+		if (!(current_a->data < min_b || current_a->data > max_b))
+			steps_small_top_big_bottom(current_a, stack_b);
+		current_a = current_a->next;
 	}
 }
 
@@ -195,43 +203,43 @@ void	show_steps(t_linked_list *stack_a)
 	}
 }
 
-void	calc_rr_and_rrr(t_linked_list *stack_a)
+void	calc_combined_steps_of_a(t_linked_list *stack_a)
 {
-	t_node	*current;
+	t_node	*current_a;
 
-	current = stack_a->head;
-	while (current)
+	current_a = stack_a->head;
+	while (current_a)
 	{
-		if (current->steps.ra && current->steps.rb)
+		if (current_a->steps.ra && current_a->steps.rb)
 		{
-			current->steps.ra--;
-			current->steps.rb--;
-			current->steps.rr++;
+			current_a->steps.ra--;
+			current_a->steps.rb--;
+			current_a->steps.rr++;
 		}
-		if (current->steps.rra && current->steps.rrb)
+		if (current_a->steps.rra && current_a->steps.rrb)
 		{
-			current->steps.rra--;
-			current->steps.rrb--;
-			current->steps.rrr++;
+			current_a->steps.rra--;
+			current_a->steps.rrb--;
+			current_a->steps.rrr++;
 		}
-		current = current->next;
+		current_a = current_a->next;
 	}
 }
 
-void	count_steps(t_linked_list *stack_a, t_linked_list *stack_b)
+void	count_sorting_steps(t_linked_list *stack_a, t_linked_list *stack_b)
 {
-	t_node	*current;
+	t_node	*current_a;
 
-	current = stack_a->head;
-	while (current)
+	current_a = stack_a->head;
+	while (current_a)
 	{
-		current->steps = (t_steps){0};
-		current = current->next;
+		current_a->steps = (t_steps){0};
+		current_a = current_a->next;
 	}
-	move_to_top(stack_a);
-	move_min_or_max(stack_a, stack_b);
-	move_in_between(stack_a, stack_b);
-	calc_rr_and_rrr(stack_a);
+	steps_to_top_of_a(stack_a);
+	steps_to_handle_min_max(stack_a, stack_b);
+	steps_for_other_numbers(stack_a, stack_b);
+	calc_combined_steps_of_a(stack_a);
 }
 
 int	sum_steps(t_node *current)
@@ -294,7 +302,7 @@ int	find_max_index(t_linked_list *stack_b)
 	t_node	*current;
 
 	add_index(stack_b);
-	max = find_max(stack_b);
+	max = find_max_num(stack_b);
 	current = stack_b->head;
 	while (current)
 	{
@@ -305,24 +313,24 @@ int	find_max_index(t_linked_list *stack_b)
 	return (current->index);
 }
 
-void	sort_descending(t_linked_list *stack_b)
+void	sort_descending(t_linked_list *stack)
 {
 	int		size;
-	int		max_b;
+	int		max_num;
 	int		max_index;
 	t_node	*current;
 
-	size = count_size(stack_b);
-	max_b = find_max(stack_b);
-	max_index = find_max_index(stack_b);
-	current = stack_b->head;
-	while (current->data != max_b)
+	size = count_stack_size(stack);
+	max_num = find_max_num(stack);
+	max_index = find_max_index(stack);
+	current = stack->head;
+	while (current->data != max_num)
 	{
 		if (max_index > (size / 2))
-			rrb(stack_b);
+			rrb(stack);
 		else
-			rb(stack_b);
-		current = stack_b->head;
+			rb(stack);
+		current = stack->head;
 	}
 }
 
@@ -330,32 +338,32 @@ void	empty_stack_b(t_linked_list *stack_a, t_linked_list *stack_b)
 {
 	int	size_b;
 
-	size_b = count_size(stack_b);
+	size_b = count_stack_size(stack_b);
 	while (size_b--)
 		pa(stack_a, stack_b);
 }
 
 void	sort_big(t_linked_list *stack_a, t_linked_list *stack_b)
 {
-	int		size;
-	t_node	*current;
+	int		size_a;
+	t_node	*current_a;
 
 	pb(stack_a, stack_b);
 	pb(stack_a, stack_b);
-	size = count_size(stack_a);
-	while (size--)
+	size_a = count_stack_size(stack_a);
+	while (size_a--)
 	{
-		count_steps(stack_a, stack_b);
-		current = stack_a->head;
-		while (current)
+		count_sorting_steps(stack_a, stack_b);
+		current_a = stack_a->head;
+		while (current_a)
 		{
-			if (current->index == find_min_steps_index(stack_a))
+			if (current_a->index == find_min_steps_index(stack_a))
 			{
-				run_steps(current, stack_a, stack_b);
+				run_steps(current_a, stack_a, stack_b);
 				pb(stack_a, stack_b);
 				break ;
 			}
-			current = current->next;
+			current_a = current_a->next;
 		}
 	}
 	sort_descending(stack_b);
