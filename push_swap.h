@@ -6,7 +6,7 @@
 /*   By: ychng <ychng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 14:48:15 by ychng             #+#    #+#             */
-/*   Updated: 2023/09/15 19:59:02 by ychng            ###   ########.fr       */
+/*   Updated: 2023/09/17 13:46:44 by ychng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,12 @@ typedef struct s_linked_list
 	t_node	*head;
 	t_node	*tail;	
 }	t_linked_list;
+
+typedef struct s_stacks
+{
+	t_linked_list	*stack_a;
+	t_linked_list	*stack_b;
+}	t_stacks;
 
 // operations_utils.c
 t_node	*create_node(int num);

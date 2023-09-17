@@ -6,7 +6,7 @@
 /*   By: ychng <ychng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 14:48:10 by ychng             #+#    #+#             */
-/*   Updated: 2023/09/16 20:12:05 by ychng            ###   ########.fr       */
+/*   Updated: 2023/09/17 13:44:53 by ychng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,34 +61,34 @@ void	steps_to_top_of_a(t_linked_list *stack_a)
 
 int	find_min_num(t_linked_list *stack)
 {
-	int		min;
+	int		min_num;
 	t_node	*current;
 
-	min = stack->head->data;
+	min_num = stack->head->data;
 	current = stack->head;
 	while (current)
 	{
-		if (min > current->data)
-			min = current->data;
+		if (min_num > current->data)
+			min_num = current->data;
 		current = current->next;
 	}
-	return (min);
+	return (min_num);
 }
 
 int	find_max_num(t_linked_list *stack)
 {
-	int		max;
+	int		max_num;
 	t_node	*current;
 
-	max = stack->head->data;
+	max_num = stack->head->data;
 	current = stack->head;
 	while (current)
 	{
-		if (max < current->data)
-			max = current->data;
+		if (max_num < current->data)
+			max_num = current->data;
 		current = current->next;
 	}
-	return (max);
+	return (max_num);
 }
 
 void	steps_max_to_top_of_b(t_node *current_a, t_linked_list *stack_b)
@@ -97,7 +97,6 @@ void	steps_max_to_top_of_b(t_node *current_a, t_linked_list *stack_b)
 	int		size_b;
 	t_node	*current_b;
 
-	add_index(stack_b);
 	max_b = find_max_num(stack_b);
 	size_b = count_stack_size(stack_b);
 	current_b = stack_b->head;
@@ -106,9 +105,9 @@ void	steps_max_to_top_of_b(t_node *current_a, t_linked_list *stack_b)
 		if (current_b->data == max_b)
 		{
 			if (current_b->index > (size_b / 2))
-				current_b->steps.rra += (size_b - current_b->index);
+				current_a->steps.rrb += (size_b - current_b->index);
 			else
-				current_b->steps.ra += current_b->index;
+				current_a->steps.rb += (current_b->index);
 		}
 		current_b = current_b->next;
 	}
@@ -120,6 +119,7 @@ void	steps_to_handle_min_max(t_linked_list *stack_a, t_linked_list *stack_b)
 	int		max_b;
 	t_node	*current_a;
 
+	add_index(stack_b);
 	min_b = find_min_num(stack_b);
 	max_b = find_max_num(stack_b);
 	current_a = stack_a->head;
@@ -135,7 +135,6 @@ void	set_steps(t_node *current_a, t_node *current_b, t_linked_list *stack_b)
 {
 	int	size_b;
 
-	add_index(stack_b);
 	size_b = count_stack_size(stack_b);
 	if (current_b->next->index > (size_b / 2))
 		current_a->steps.rrb = (size_b - current_b->next->index);
@@ -148,21 +147,20 @@ void	steps_small_top_big_bottom(t_node *current_a, t_linked_list *stack_b)
 	int		a_data;
 	int		b_data;
 	int		next_b_data;
-	t_node	*tail_b;
 	t_node	*current_b;
 
-	tail_b = stack_b->tail;
 	current_b = stack_b->head;
 	a_data = current_a->data;
-	if (a_data > b_data && a_data < tail_b->data)
+	b_data = current_b->data;
+	if (a_data > b_data && a_data < stack_b->tail->data)
 		return ;
 	while (current_b->next)
 	{
-		b_data = current_b->data;
 		next_b_data = current_b->next->data;
 		if (a_data > next_b_data && a_data < b_data)
 			set_steps(current_a, current_b, stack_b);
 		current_b = current_b->next;
+		b_data = current_b->data;
 	}
 }
 
@@ -172,6 +170,7 @@ void	steps_for_other_numbers(t_linked_list *stack_a, t_linked_list *stack_b)
 	int		max_b;
 	t_node	*current_a;
 
+	add_index(stack_b);
 	min_b = find_min_num(stack_b);
 	max_b = find_max_num(stack_b);
 	current_a = stack_a->head;
@@ -183,27 +182,7 @@ void	steps_for_other_numbers(t_linked_list *stack_a, t_linked_list *stack_b)
 	}
 }
 
-void	show_steps(t_linked_list *stack_a)
-{
-	t_node	*current;
-
-	current = stack_a->head;
-	while (current)
-	{
-		printf("\n\nCurrent number: %d", current->data);
-		printf("\n-------------------\n");
-		printf("ra: %d  ", current->steps.ra);
-		printf("rb: %d  ", current->steps.rb);
-		printf("rr: %d  ", current->steps.rr);
-		printf("rra: %d  ", current->steps.rra);
-		printf("rrb: %d  ", current->steps.rrb);
-		printf("rrr: %d  ", current->steps.rrr);
-		printf("\n-------------------\n");
-		current = current->next;
-	}
-}
-
-void	calc_combined_steps_of_a(t_linked_list *stack_a)
+void	steps_for_rr_rrr(t_linked_list *stack_a)
 {
 	t_node	*current_a;
 
@@ -239,74 +218,73 @@ void	count_sorting_steps(t_linked_list *stack_a, t_linked_list *stack_b)
 	steps_to_top_of_a(stack_a);
 	steps_to_handle_min_max(stack_a, stack_b);
 	steps_for_other_numbers(stack_a, stack_b);
-	calc_combined_steps_of_a(stack_a);
+	steps_for_rr_rrr(stack_a);
 }
 
-int	sum_steps(t_node *current)
+int	sum_steps(t_node *current_a)
 {
 	int	total_steps;
 
 	total_steps = 0;
-	total_steps += current->steps.ra;
-	total_steps += current->steps.rb;
-	total_steps += current->steps.rr;
-	total_steps += current->steps.rra;
-	total_steps += current->steps.rrb;
-	total_steps += current->steps.rrr;
+	total_steps += current_a->steps.ra;
+	total_steps += current_a->steps.rb;
+	total_steps += current_a->steps.rr;
+	total_steps += current_a->steps.rra;
+	total_steps += current_a->steps.rrb;
+	total_steps += current_a->steps.rrr;
 	return (total_steps);
 }
 
 int	find_min_steps_index(t_linked_list *stack_a)
 {
-	int		current_steps;
-	int		next_steps;
-	t_node	*current;
+	int		total_steps;
+	int		next_total_steps;
+	t_node	*current_a;
 	t_node	*best_node;
 
-	current = stack_a->head;
-	best_node = current;
-	current_steps = sum_steps(current);
-	while (current->next)
+	current_a = stack_a->head;
+	best_node = current_a;
+	total_steps = sum_steps(current_a);
+	while (current_a->next)
 	{
-		next_steps = sum_steps(current->next);
-		if (current_steps > next_steps)
+		next_total_steps = sum_steps(current_a->next);
+		if (total_steps > next_total_steps)
 		{
-			current_steps = next_steps;
-			best_node = current->next;
+			total_steps = next_total_steps;
+			best_node = current_a->next;
 		}
-		current = current->next;
+		current_a = current_a->next;
 	}
 	return (best_node->index);
 }
 
-void	run_steps(t_node *current, t_linked_list *stack_a,
-					t_linked_list *stack_b)
+void	run_steps(t_node *current_a, t_stacks *stacks)
 {
-	while (current->steps.ra--)
-		ra(stack_a);
-	while (current->steps.rb--)
-		rb(stack_b);
-	while (current->steps.rr--)
-		rr(stack_a, stack_b);
-	while (current->steps.rra--)
-		rra(stack_a);
-	while (current->steps.rrb--)
-		rrb(stack_b);
-	while (current->steps.rrr--)
-		rrr(stack_a, stack_b);
+	while (current_a->steps.ra--)
+		ra(stacks->stack_a);
+	while (current_a->steps.rb--)
+		rb(stacks->stack_a);
+	while (current_a->steps.rr--)
+		rr(stacks->stack_a, stacks->stack_a);
+	while (current_a->steps.rra--)
+		rra(stacks->stack_a);
+	while (current_a->steps.rrb--)
+		rrb(stacks->stack_a);
+	while (current_a->steps.rrr--)
+		rrr(stacks->stack_a, stacks->stack_a);
 }
 
-int	find_max_index(t_linked_list *stack_b)
+int	find_max_index(t_linked_list *stack)
 {
-	int		max;
+	int		max_num;
 	t_node	*current;
 
-	add_index(stack_b);
-	max = find_max_num(stack_b);
-	current = stack_b->head;
+	add_index(stack);
+	max_num = find_max_num(stack);
+	current = stack->head;
 	while (current)
 	{
-		if (current->data == max)
+		if (current->data == max_num)
 			break ;
 		current = current->next;
 	}
@@ -359,7 +337,7 @@ void	sort_big(t_linked_list *stack_a, t_linked_list *stack_b)
 		{
 			if (current_a->index == find_min_steps_index(stack_a))
 			{
-				run_steps(current_a, stack_a, stack_b);
+				run_steps(current_a, &(t_stacks){stack_a, stack_b});
 				pb(stack_a, stack_b);
 				break ;
 			}
