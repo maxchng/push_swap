@@ -6,7 +6,7 @@
 /*   By: ychng <ychng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 14:48:10 by ychng             #+#    #+#             */
-/*   Updated: 2023/09/17 13:44:53 by ychng            ###   ########.fr       */
+/*   Updated: 2023/09/17 13:58:59 by ychng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -258,20 +258,20 @@ int	find_min_steps_index(t_linked_list *stack_a)
 	return (best_node->index);
 }
 
-void	run_steps(t_node *current_a, t_stacks *stacks)
+void	run_steps(t_node *current_a, t_stacks stacks)
 {
 	while (current_a->steps.ra--)
-		ra(stacks->stack_a);
+		ra(stacks.stack_a);
 	while (current_a->steps.rb--)
-		rb(stacks->stack_a);
+		rb(stacks.stack_b);
 	while (current_a->steps.rr--)
-		rr(stacks->stack_a, stacks->stack_a);
+		rr(stacks.stack_a, stacks.stack_b);
 	while (current_a->steps.rra--)
-		rra(stacks->stack_a);
+		rra(stacks.stack_a);
 	while (current_a->steps.rrb--)
-		rrb(stacks->stack_a);
+		rrb(stacks.stack_b);
 	while (current_a->steps.rrr--)
-		rrr(stacks->stack_a, stacks->stack_a);
+		rrr(stacks.stack_a, stacks.stack_b);
 }
 
 int	find_max_index(t_linked_list *stack)
@@ -337,7 +337,7 @@ void	sort_big(t_linked_list *stack_a, t_linked_list *stack_b)
 		{
 			if (current_a->index == find_min_steps_index(stack_a))
 			{
-				run_steps(current_a, &(t_stacks){stack_a, stack_b});
+				run_steps(current_a, (t_stacks){stack_a, stack_b});
 				pb(stack_a, stack_b);
 				break ;
 			}
