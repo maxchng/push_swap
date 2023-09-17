@@ -13,7 +13,12 @@ SRCS =	push_swap.c \
 		ft_strtok.c \
 		ps_atoi.c \
 		parse_argv.c \
-		err_handling.c
+		err_handling.c \
+		sort_big.c \
+		sort_big_utils_1.c \
+		sort_big_utils_2.c \
+		count_steps.c \
+		count_steps_utils.c
 
 # Object files
 OBJS = $(SRCS:.c=.o)
