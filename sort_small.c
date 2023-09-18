@@ -6,11 +6,20 @@
 /*   By: ychng <ychng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 02:46:45 by ychng             #+#    #+#             */
-/*   Updated: 2023/09/19 02:47:31 by ychng            ###   ########.fr       */
+/*   Updated: 2023/09/19 03:27:08 by ychng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	sort_two(t_linked_list *stack_a)
+{
+	t_node	*current_a;
+
+	current_a = stack_a->head;
+	if (current_a->rank != 1)
+		ra(stack_a);
+}
 
 void	sort_three(t_linked_list *stack_a, t_linked_list *stack_b)
 {
