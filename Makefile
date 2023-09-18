@@ -17,8 +17,10 @@ SRCS =	push_swap.c \
 		sort_big.c \
 		sort_big_utils_1.c \
 		sort_big_utils_2.c \
-		count_steps.c \
-		count_steps_utils.c
+		count_ascending.c \
+		count_descending.c \
+		count_utils_1.c \
+		count_utils_2.c
 
 # Object files
 OBJS = $(SRCS:.c=.o)

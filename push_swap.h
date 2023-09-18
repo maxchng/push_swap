@@ -6,7 +6,7 @@
 /*   By: ychng <ychng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 14:48:15 by ychng             #+#    #+#             */
-/*   Updated: 2023/09/18 17:15:33 by ychng            ###   ########.fr       */
+/*   Updated: 2023/09/18 19:50:51 by ychng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@
 
 typedef struct s_steps
 {
-	unsigned int	ra;
-	unsigned int	rb;
-	unsigned int	rr;
-	unsigned int	rra;
-	unsigned int	rrb;
-	unsigned int	rrr;
+	int	ra;
+	int	rb;
+	int	rr;
+	int	rra;
+	int	rrb;
+	int	rrr;
 }	t_steps;
 
 typedef struct s_node
@@ -105,14 +105,21 @@ int		find_max_index(t_linked_list *stack);
 int		sum_steps(t_node *current_a);
 void	run_steps(t_node *current_a, t_stacks stacks);
 
-// count_steps.c
-void	steps_to_top_of_a(t_linked_list *stack_a);
-void	steps_to_handle_min_max(t_stacks stacks);
-void	steps_for_rr_rrr(t_linked_list *stack_a);
-void	count_sorting_steps(t_linked_list *stack_a, t_linked_list *stack_b);
+// count_ascending.c
+void	count_ascending_steps(t_linked_list *stack_a, t_linked_list *stack_b);
 
-// count_steps_utils.c
+// count_descending.c
+void	count_descending_steps(t_linked_list *stack_a, t_linked_list *stack_b);
+
+// count_utils_1.c
+void	steps_to_top_of_a(t_linked_list *stack_a);
+void	steps_for_rr_rrr(t_linked_list *stack_a);
+void	steps_small_top_big_bottom(t_node *current_a, t_linked_list *stack_b);
+void	steps_big_top_small_bottom(t_node *current_a, t_linked_list *stack_b);
+
+// count_utils_2.c
+void	steps_min_to_top_of_b(t_node *current_a, t_linked_list *stack_b);
 void	steps_max_to_top_of_b(t_node *current_a, t_linked_list *stack_b);
 void	set_steps(t_node *current_a, t_node *current_b, t_linked_list *stack_b);
-void	steps_small_top_big_bottom(t_node *current_a, t_linked_list *stack_b);
+
 #endif
