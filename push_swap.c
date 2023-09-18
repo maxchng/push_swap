@@ -6,7 +6,7 @@
 /*   By: ychng <ychng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 14:48:10 by ychng             #+#    #+#             */
-/*   Updated: 2023/09/17 16:51:06 by ychng            ###   ########.fr       */
+/*   Updated: 2023/09/19 02:54:01 by ychng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	main(int argc, char **argv)
 {
+	int				size_a;
 	t_linked_list	stack_a;
 	t_linked_list	stack_b;
 
@@ -22,6 +23,12 @@ int	main(int argc, char **argv)
 	if (argc >= 2)
 	{
 		parse_argv(&stack_a, argc, argv);
-		sort_big(&stack_a, &stack_b);
+		size_a = count_stack_size(&stack_a);
+		if (size_a == 3)
+			sort_three(&stack_a, &stack_b);
+		else if (size_a == 5)
+			sort_five(&stack_a, &stack_b);
+		else if (size_a > 10)
+			sort_big(&stack_a, &stack_b);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: ychng <ychng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 14:48:15 by ychng             #+#    #+#             */
-/*   Updated: 2023/09/18 22:34:50 by ychng            ###   ########.fr       */
+/*   Updated: 2023/09/19 02:49:18 by ychng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_steps
 typedef struct s_node
 {
 	int				data;
+	int				rank;
 	int				index;
 	struct s_node	*next;
 	struct s_node	*prev;
@@ -90,6 +91,14 @@ void	parse_argv(t_linked_list *stack_a, int argc, char **argv);
 // err_handling.c
 void	free_stack(t_linked_list *stack);
 void	exit_error(t_linked_list *stack, char *msg);
+
+// sort_small.c
+void	sort_three(t_linked_list *stack_a, t_linked_list *stack_b);
+void	sort_five(t_linked_list *stack_a, t_linked_list *stack_b);
+
+// sort_small_utils.c
+void	add_rank(t_linked_list *stack);
+void	set_ra_rra(t_node *current_a, t_linked_list *stack_a);
 
 // sort_big.c
 void	sort_big(t_linked_list *stack_a, t_linked_list *stack_b);

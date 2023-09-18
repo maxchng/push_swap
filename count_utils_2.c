@@ -6,7 +6,7 @@
 /*   By: ychng <ychng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 19:35:53 by ychng             #+#    #+#             */
-/*   Updated: 2023/09/18 19:51:29 by ychng            ###   ########.fr       */
+/*   Updated: 2023/09/19 02:50:55 by ychng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	set_steps(t_node *current_a, t_node *current_b, t_linked_list *stack_b)
 
 	size_b = count_stack_size(stack_b);
 	if (current_b->next->index > (size_b / 2))
-		current_a->steps.rrb = (size_b - current_b->next->index);
+		current_a->steps.rrb += (size_b - current_b->next->index);
 	else
-		current_a->steps.rb = current_b->next->index;
+		current_a->steps.rb += current_b->next->index;
 }

@@ -14,6 +14,8 @@ SRCS =	push_swap.c \
 		ps_atoi.c \
 		parse_argv.c \
 		err_handling.c \
+		sort_small.c \
+		sort_small_utils.c \
 		sort_big.c \
 		sort_big_utils_1.c \
 		sort_big_utils_2.c \
