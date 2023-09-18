@@ -6,7 +6,7 @@
 /*   By: ychng <ychng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 14:48:15 by ychng             #+#    #+#             */
-/*   Updated: 2023/09/17 17:05:25 by ychng            ###   ########.fr       */
+/*   Updated: 2023/09/18 17:15:33 by ychng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,9 @@ int		sum_steps(t_node *current_a);
 void	run_steps(t_node *current_a, t_stacks stacks);
 
 // count_steps.c
+void	steps_to_top_of_a(t_linked_list *stack_a);
+void	steps_to_handle_min_max(t_stacks stacks);
+void	steps_for_rr_rrr(t_linked_list *stack_a);
 void	count_sorting_steps(t_linked_list *stack_a, t_linked_list *stack_b);
 
 // count_steps_utils.c
