@@ -6,7 +6,7 @@
 /*   By: ychng <ychng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 16:46:46 by ychng             #+#    #+#             */
-/*   Updated: 2023/09/18 22:34:27 by ychng            ###   ########.fr       */
+/*   Updated: 2023/09/20 00:24:28 by ychng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,17 @@ int	sum_steps(t_node *current_a)
 void	run_steps(t_node *current_a, t_stacks stacks)
 {
 	while (current_a->steps.ra--)
-		ra(stacks.stack_a);
+		ra(stacks.stack_a, 1);
 	while (current_a->steps.rb--)
-		rb(stacks.stack_b);
+		rb(stacks.stack_b, 1);
 	while (current_a->steps.rr--)
-		rr(stacks.stack_a, stacks.stack_b);
+		rr(stacks.stack_a, stacks.stack_b, 1);
 	while (current_a->steps.rra--)
-		rra(stacks.stack_a);
+		rra(stacks.stack_a, 1);
 	while (current_a->steps.rrb--)
-		rrb(stacks.stack_b);
+		rrb(stacks.stack_b, 1);
 	while (current_a->steps.rrr--)
-		rrr(stacks.stack_a, stacks.stack_b);
+		rrr(stacks.stack_a, stacks.stack_b, 1);
 }
 
 int	find_min_steps_index(t_linked_list *stack_a)
@@ -79,9 +79,9 @@ void	sort_descending(t_linked_list *stack)
 	while (current->data != max_num)
 	{
 		if (max_index > (size / 2))
-			rrb(stack);
+			rrb(stack, 1);
 		else
-			rb(stack);
+			rb(stack, 1);
 		current = stack->head;
 	}
 }

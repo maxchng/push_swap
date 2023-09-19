@@ -6,7 +6,7 @@
 /*   By: ychng <ychng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 16:46:10 by ychng             #+#    #+#             */
-/*   Updated: 2023/09/18 22:43:33 by ychng            ###   ########.fr       */
+/*   Updated: 2023/09/20 00:24:14 by ychng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	descending_order(t_linked_list *stack_a, t_linked_list *stack_b)
 			if (current_a->index == find_min_steps_index(stack_a))
 			{
 				run_steps(current_a, (t_stacks){stack_a, stack_b});
-				pb(stack_a, stack_b);
+				pb(stack_a, stack_b, 1);
 				break ;
 			}
 			current_a = current_a->next;
@@ -53,7 +53,7 @@ static void	ascending_order(t_linked_list *stack_a, t_linked_list *stack_b)
 			if (current_a->index == find_min_steps_index(stack_a))
 			{
 				run_steps(current_a, (t_stacks){stack_a, stack_b});
-				pb(stack_a, stack_b);
+				pb(stack_a, stack_b, 1);
 				break ;
 			}
 			current_a = current_a->next;
@@ -70,15 +70,15 @@ static void	empty_stack_b(t_linked_list *stack_a, t_linked_list *stack_b)
 	while (size_b--)
 	{
 		if (stack_b->head->data < stack_b->tail->data)
-			rrb(stack_b);
-		pa(stack_a, stack_b);
+			rrb(stack_b, 1);
+		pa(stack_a, stack_b, 1);
 	}
 }
 
 void	sort_big(t_linked_list *stack_a, t_linked_list *stack_b)
 {
-	pb(stack_a, stack_b);
-	pb(stack_a, stack_b);
+	pb(stack_a, stack_b, 1);
+	pb(stack_a, stack_b, 1);
 	descending_order(stack_a, stack_b);
 	ascending_order(stack_a, stack_b);
 	empty_stack_b(stack_a, stack_b);

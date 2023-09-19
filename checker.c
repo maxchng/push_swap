@@ -6,7 +6,7 @@
 /*   By: ychng <ychng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:15:34 by ychng             #+#    #+#             */
-/*   Updated: 2023/09/20 00:16:29 by ychng            ###   ########.fr       */
+/*   Updated: 2023/09/20 00:22:14 by ychng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,27 +32,27 @@ static int	is_not_valid(char *input)
 static void	run_input(t_stacks stacks, char *input)
 {
 	if (ft_strncmp(input, "sa\n", ft_strlen(input)) == 0)
-		sa(stacks.stack_a);
+		sa(stacks.stack_a, 0);
 	else if (ft_strncmp(input, "sb\n", ft_strlen(input)) == 0)
-		sb(stacks.stack_b);
+		sb(stacks.stack_b, 0);
 	else if (ft_strncmp(input, "ss\n", ft_strlen(input)) == 0)
-		ss(stacks.stack_a, stacks.stack_b);
+		ss(stacks.stack_a, stacks.stack_b, 0);
 	else if (ft_strncmp(input, "pa\n", ft_strlen(input)) == 0)
-		pa(stacks.stack_a, stacks.stack_b);
+		pa(stacks.stack_a, stacks.stack_b, 0);
 	else if (ft_strncmp(input, "pb\n", ft_strlen(input)) == 0)
-		pb(stacks.stack_a, stacks.stack_b);
+		pb(stacks.stack_a, stacks.stack_b, 0);
 	else if (ft_strncmp(input, "ra\n", ft_strlen(input)) == 0)
-		ra(stacks.stack_a);
+		ra(stacks.stack_a, 0);
 	else if (ft_strncmp(input, "rb\n", ft_strlen(input)) == 0)
-		rb(stacks.stack_b);
+		rb(stacks.stack_b, 0);
 	else if (ft_strncmp(input, "rr\n", ft_strlen(input)) == 0)
-		rr(stacks.stack_a, stacks.stack_b);
+		rr(stacks.stack_a, stacks.stack_b, 0);
 	else if (ft_strncmp(input, "rra\n", ft_strlen(input)) == 0)
-		rra(stacks.stack_a);
+		rra(stacks.stack_a, 0);
 	else if (ft_strncmp(input, "rrb\n", ft_strlen(input)) == 0)
-		rrb(stacks.stack_b);
+		rrb(stacks.stack_b, 0);
 	else if (ft_strncmp(input, "rrr\n", ft_strlen(input)) == 0)
-		rrr(stacks.stack_a, stacks.stack_b);
+		rrr(stacks.stack_a, stacks.stack_b, 0);
 }
 
 static void	check_input(t_linked_list *stack_a, t_linked_list *stack_b)
