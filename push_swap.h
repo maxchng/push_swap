@@ -6,7 +6,7 @@
 /*   By: ychng <ychng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 14:48:15 by ychng             #+#    #+#             */
-/*   Updated: 2023/09/19 21:47:16 by ychng            ###   ########.fr       */
+/*   Updated: 2023/09/19 23:57:16 by ychng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <unistd.h>
 # include <limits.h>
 # include "libft.h"
+# include "get_next_line.h"
 
 typedef struct s_steps
 {
@@ -50,6 +51,9 @@ typedef struct s_stacks
 	t_linked_list	*stack_a;
 	t_linked_list	*stack_b;
 }	t_stacks;
+
+// utils.c
+int		is_not_sorted(t_linked_list *stack_a);
 
 // operations_utils.c
 t_node	*create_node(int num);

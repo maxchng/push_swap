@@ -6,25 +6,11 @@
 /*   By: ychng <ychng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 14:48:10 by ychng             #+#    #+#             */
-/*   Updated: 2023/09/19 22:10:26 by ychng            ###   ########.fr       */
+/*   Updated: 2023/09/19 23:57:04 by ychng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-static int	is_not_sorted(t_linked_list *stack_a)
-{
-	t_node	*current_a;
-
-	current_a = stack_a->head;
-	while (current_a->next)
-	{
-		if (current_a->data > current_a->next->data)
-			return (1);
-		current_a = current_a->next;
-	}
-	return (0);
-}
 
 static void	handle_sort(t_linked_list *stack_a, t_linked_list *stack_b)
 {
