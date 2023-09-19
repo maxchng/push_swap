@@ -6,7 +6,7 @@
 /*   By: ychng <ychng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 02:46:45 by ychng             #+#    #+#             */
-/*   Updated: 2023/09/19 03:27:08 by ychng            ###   ########.fr       */
+/*   Updated: 2023/09/19 21:44:45 by ychng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,29 @@ void	sort_three(t_linked_list *stack_a, t_linked_list *stack_b)
 		sa(stack_a);
 		rra(stack_a);
 	}
+}
+
+void	sort_four(t_linked_list *stack_a, t_linked_list *stack_b)
+{
+	t_node	*current_a;
+
+	{
+		add_rank(stack_a);
+		current_a = stack_a->head;
+		while (current_a)
+		{
+			if (current_a->rank == 1)
+			{
+				set_ra_rra(current_a, stack_a);
+				break ;
+			}
+			current_a = current_a->next;
+		}
+		run_steps(current_a, (t_stacks){stack_a, stack_b});
+		pb(stack_a, stack_b);
+	}
+	sort_three(stack_a, stack_b);
+	pa(stack_a, stack_b);
 }
 
 void	sort_five(t_linked_list *stack_a, t_linked_list *stack_b)

@@ -6,7 +6,7 @@
 /*   By: ychng <ychng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 14:48:10 by ychng             #+#    #+#             */
-/*   Updated: 2023/09/19 21:20:59 by ychng            ###   ########.fr       */
+/*   Updated: 2023/09/19 21:55:17 by ychng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,32 @@ int	is_not_sorted(t_linked_list *stack_a)
 	return (0);
 }
 
+void	handle_small_cases(t_linked_list *stack_a, t_linked_list *stack_b)
+{
+	int	size_a;
+
+	size_a = count_stack_size(stack_a);
+	if (size_a == 2)
+		sort_two(stack_a);
+	else if (size_a == 3)
+		sort_three(stack_a, stack_b);
+	else if (size_a == 3)
+		sort_four(stack_a, stack_b);
+	else if (size_a == 5)
+		sort_five(stack_a, stack_b);
+}
+
+void	handle_big_cases(t_linked_list *stack_a, t_linked_list *stack_b)
+{
+	int	size_a;
+
+	size_a = count_stack_size(stack_a);
+	if (size_a > 10)
+		sort_big(stack_a, stack_b);
+}
+
 int	main(int argc, char **argv)
 {
-	int				size_a;
 	t_linked_list	stack_a;
 	t_linked_list	stack_b;
 
@@ -37,18 +60,10 @@ int	main(int argc, char **argv)
 	if (argc >= 2)
 	{
 		parse_argv(&stack_a, argc, argv);
-		
 		if (is_not_sorted(&stack_a))
 		{
-			size_a = count_stack_size(&stack_a);
-			if (size_a == 2)
-				sort_two(&stack_a);
-			else if (size_a == 3)
-				sort_three(&stack_a, &stack_b);
-			else if (size_a == 5)
-				sort_five(&stack_a, &stack_b);
-			else if (size_a > 10)
-				sort_big(&stack_a, &stack_b);
+			handle_small_cases(&stack_a, &stack_b);
+			handle_big_cases(&stack_a, &stack_a);
 		}
 	}
 	free_stack(&stack_a);

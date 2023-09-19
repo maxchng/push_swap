@@ -6,7 +6,7 @@
 /*   By: ychng <ychng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 14:48:15 by ychng             #+#    #+#             */
-/*   Updated: 2023/09/19 03:27:35 by ychng            ###   ########.fr       */
+/*   Updated: 2023/09/19 21:47:16 by ychng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ void	exit_error(t_linked_list *stack, char *msg);
 // sort_small.c
 void	sort_two(t_linked_list *stack_a);
 void	sort_three(t_linked_list *stack_a, t_linked_list *stack_b);
+void	sort_four(t_linked_list *stack_a, t_linked_list *stack_b);
 void	sort_five(t_linked_list *stack_a, t_linked_list *stack_b);
 
 // sort_small_utils.c
