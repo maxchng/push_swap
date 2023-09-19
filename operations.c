@@ -6,7 +6,7 @@
 /*   By: ychng <ychng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 22:03:31 by ychng             #+#    #+#             */
-/*   Updated: 2023/09/11 14:36:04 by ychng            ###   ########.fr       */
+/*   Updated: 2023/09/19 19:32:58 by ychng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,16 @@ void	swap(t_linked_list *stack)
 {
 	t_node	*first;
 	t_node	*second;
+	t_node	*third;
 
 	first = stack->head;
 	second = first->next;
+	third = second->next;
 	first->next = second->next;
 	first->prev = second;
 	second->next = first;
 	second->prev = 0;
+	third->prev = first;
 	stack->head = second;
 }
 
