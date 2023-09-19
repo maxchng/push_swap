@@ -6,7 +6,7 @@
 /*   By: ychng <ychng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:15:34 by ychng             #+#    #+#             */
-/*   Updated: 2023/09/19 23:32:04 by ychng            ###   ########.fr       */
+/*   Updated: 2023/09/20 00:16:29 by ychng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,44 +14,44 @@
 
 static int	is_not_valid(char *input)
 {
-	if (ft_strncmp(input, "sa", ft_strlen(input)) == 0
-		|| ft_strncmp(input, "sb", ft_strlen(input)) == 0
-		|| ft_strncmp(input, "ss", ft_strlen(input)) == 0
-		|| ft_strncmp(input, "pa", ft_strlen(input)) == 0
-		|| ft_strncmp(input, "pb", ft_strlen(input)) == 0
-		|| ft_strncmp(input, "ra", ft_strlen(input)) == 0
-		|| ft_strncmp(input, "rb", ft_strlen(input)) == 0
-		|| ft_strncmp(input, "rr", ft_strlen(input)) == 0
-		|| ft_strncmp(input, "rra", ft_strlen(input)) == 0
-		|| ft_strncmp(input, "rrb", ft_strlen(input)) == 0
-		|| ft_strncmp(input, "rrr", ft_strlen(input)) == 0)
+	if (ft_strncmp(input, "sa\n", ft_strlen(input)) == 0
+		|| ft_strncmp(input, "sb\n", ft_strlen(input)) == 0
+		|| ft_strncmp(input, "ss\n", ft_strlen(input)) == 0
+		|| ft_strncmp(input, "pa\n", ft_strlen(input)) == 0
+		|| ft_strncmp(input, "pb\n", ft_strlen(input)) == 0
+		|| ft_strncmp(input, "ra\n", ft_strlen(input)) == 0
+		|| ft_strncmp(input, "rb\n", ft_strlen(input)) == 0
+		|| ft_strncmp(input, "rr\n", ft_strlen(input)) == 0
+		|| ft_strncmp(input, "rra\n", ft_strlen(input)) == 0
+		|| ft_strncmp(input, "rrb\n", ft_strlen(input)) == 0
+		|| ft_strncmp(input, "rrr\n", ft_strlen(input)) == 0)
 		return (0);
 	return (1);
 }
 
 static void	run_input(t_stacks stacks, char *input)
 {
-	if (ft_strncmp(input, "sa", ft_strlen(input)) == 0)
+	if (ft_strncmp(input, "sa\n", ft_strlen(input)) == 0)
 		sa(stacks.stack_a);
-	if (ft_strncmp(input, "sb", ft_strlen(input)) == 0)
+	else if (ft_strncmp(input, "sb\n", ft_strlen(input)) == 0)
 		sb(stacks.stack_b);
-	if (ft_strncmp(input, "ss", ft_strlen(input)) == 0)
+	else if (ft_strncmp(input, "ss\n", ft_strlen(input)) == 0)
 		ss(stacks.stack_a, stacks.stack_b);
-	if (ft_strncmp(input, "pa", ft_strlen(input)) == 0)
+	else if (ft_strncmp(input, "pa\n", ft_strlen(input)) == 0)
 		pa(stacks.stack_a, stacks.stack_b);
-	if (ft_strncmp(input, "pb", ft_strlen(input)) == 0)
+	else if (ft_strncmp(input, "pb\n", ft_strlen(input)) == 0)
 		pb(stacks.stack_a, stacks.stack_b);
-	if (ft_strncmp(input, "ra", ft_strlen(input)) == 0)
+	else if (ft_strncmp(input, "ra\n", ft_strlen(input)) == 0)
 		ra(stacks.stack_a);
-	if (ft_strncmp(input, "rb", ft_strlen(input)) == 0)
+	else if (ft_strncmp(input, "rb\n", ft_strlen(input)) == 0)
 		rb(stacks.stack_b);
-	if (ft_strncmp(input, "rr", ft_strlen(input)) == 0)
+	else if (ft_strncmp(input, "rr\n", ft_strlen(input)) == 0)
 		rr(stacks.stack_a, stacks.stack_b);
-	if (ft_strncmp(input, "rra", ft_strlen(input)) == 0)
+	else if (ft_strncmp(input, "rra\n", ft_strlen(input)) == 0)
 		rra(stacks.stack_a);
-	if (ft_strncmp(input, "rrb", ft_strlen(input)) == 0)
+	else if (ft_strncmp(input, "rrb\n", ft_strlen(input)) == 0)
 		rrb(stacks.stack_b);
-	if (ft_strncmp(input, "rrr", ft_strlen(input)) == 0)
+	else if (ft_strncmp(input, "rrr\n", ft_strlen(input)) == 0)
 		rrr(stacks.stack_a, stacks.stack_b);
 }
 

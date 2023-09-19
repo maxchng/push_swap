@@ -69,7 +69,7 @@ $(NAME): $(OBJS)
 
 bonus: $(filter-out push_swap.o, $(OBJS)) $(BONUS_OBJS) $(GNL_OBJS)
 	@$(LIBFT_MAKE) re
-	@$(CC) $(CFLAGS) $(filter-out push_swap.o, $(OBJS)) $(BONUS_OBJS) $(GNL_OBJS) $(LDFLAGS) $(LDLIBS) -o $(BONUS_NAME)
+	@$(CC) $(CFLAGS) $^ $(LDFLAGS) $(LDLIBS) -o $(BONUS_NAME)
 
 # Pattern rule to compile .c files into .o files
 %.o: %.c
