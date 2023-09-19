@@ -6,13 +6,13 @@
 /*   By: ychng <ychng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 14:48:10 by ychng             #+#    #+#             */
-/*   Updated: 2023/09/19 21:55:17 by ychng            ###   ########.fr       */
+/*   Updated: 2023/09/19 22:10:26 by ychng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	is_not_sorted(t_linked_list *stack_a)
+static int	is_not_sorted(t_linked_list *stack_a)
 {
 	t_node	*current_a;
 
@@ -26,7 +26,7 @@ int	is_not_sorted(t_linked_list *stack_a)
 	return (0);
 }
 
-void	handle_small_cases(t_linked_list *stack_a, t_linked_list *stack_b)
+static void	handle_sort(t_linked_list *stack_a, t_linked_list *stack_b)
 {
 	int	size_a;
 
@@ -39,14 +39,7 @@ void	handle_small_cases(t_linked_list *stack_a, t_linked_list *stack_b)
 		sort_four(stack_a, stack_b);
 	else if (size_a == 5)
 		sort_five(stack_a, stack_b);
-}
-
-void	handle_big_cases(t_linked_list *stack_a, t_linked_list *stack_b)
-{
-	int	size_a;
-
-	size_a = count_stack_size(stack_a);
-	if (size_a > 10)
+	else if (size_a > 5)
 		sort_big(stack_a, stack_b);
 }
 
@@ -61,10 +54,7 @@ int	main(int argc, char **argv)
 	{
 		parse_argv(&stack_a, argc, argv);
 		if (is_not_sorted(&stack_a))
-		{
-			handle_small_cases(&stack_a, &stack_b);
-			handle_big_cases(&stack_a, &stack_a);
-		}
+			handle_sort(&stack_a, &stack_b);
 	}
 	free_stack(&stack_a);
 	free_stack(&stack_b);
