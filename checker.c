@@ -6,7 +6,7 @@
 /*   By: ychng <ychng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:15:34 by ychng             #+#    #+#             */
-/*   Updated: 2023/09/20 00:22:14 by ychng            ###   ########.fr       */
+/*   Updated: 2023/09/20 17:08:40 by ychng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,16 @@ static void	check_input(t_linked_list *stack_a, t_linked_list *stack_b)
 	while (input)
 	{
 		if (is_not_valid(input))
-			break ;
+		{
+			free_stack(stack_b);
+			exit_error(stack_a, "Error\n");
+		}
 		run_input((t_stacks){stack_a, stack_b}, input);
 		free(input);
 		input = get_next_line(0);
 	}
 	free(input);
-	if (is_not_sorted(stack_a))
+	if (is_not_sorted(stack_a) || count_stack_size(stack_b))
 		write(1, "KO\n", 3);
 	else
 		write(1, "OK\n", 3);
