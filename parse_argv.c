@@ -6,7 +6,7 @@
 /*   By: ychng <ychng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 21:37:52 by ychng             #+#    #+#             */
-/*   Updated: 2023/09/20 18:56:09 by ychng            ###   ########.fr       */
+/*   Updated: 2023/09/12 18:40:59 by ychng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,24 +91,16 @@ void	parse_argv(t_linked_list *stack_a, int argc, char **argv)
 	char	*token;
 	t_node	*newnode;
 
-	if (argc == 2)
+	i = 1;
+	while (i < argc)
 	{
-		is_not_empty(stack_a, argv[1]);
-		token = ft_strtok(argv[1], " ");
+		is_not_empty(stack_a, argv[i]);
+		token = ft_strtok(argv[i], " ");
 		while (token)
 		{
 			validate_and_insert(stack_a, token);
 			token = ft_strtok(NULL, " ");
 		}
-	}
-	else
-	{
-		i = 1;
-		while (i < argc)
-		{
-			is_not_empty(stack_a, argv[i]);
-			validate_and_insert(stack_a, argv[i]);
-			i++;
-		}
+		i++;
 	}
 }
