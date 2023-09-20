@@ -6,7 +6,7 @@
 /*   By: ychng <ychng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 14:48:10 by ychng             #+#    #+#             */
-/*   Updated: 2023/09/19 23:57:04 by ychng            ###   ########.fr       */
+/*   Updated: 2023/09/20 17:59:25 by ychng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ static void	handle_sort(t_linked_list *stack_a, t_linked_list *stack_b)
 		sort_two(stack_a);
 	else if (size_a == 3)
 		sort_three(stack_a, stack_b);
-	else if (size_a == 3)
+	else if (size_a == 4)
 		sort_four(stack_a, stack_b);
 	else if (size_a == 5)
 		sort_five(stack_a, stack_b);
-	else if (size_a > 5)
+	else if (size_a >= 6)
 		sort_big(stack_a, stack_b);
 }
 
